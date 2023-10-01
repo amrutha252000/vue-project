@@ -9,7 +9,7 @@
             </div>
         </div>
         <button class="sports-detail" @click="navigateToPage">
-            {{sports?.title}}
+            {{sports?.title}} 
         </button>
     </div>
 </template>
@@ -19,7 +19,7 @@ export default {
     props: ['sports'],
     methods: {
       navigateToPage() {
-        console.log("🚀 ~ file: SportsCard.vue:25 ~ navigateToPage ~ this.sports.title.toLowerCase():", this.sports.title.toLowerCase())
+        //console.log("🚀 ~ file: SportsCard.vue:25 ~ navigateToPage ~ this.sports.title.toLowerCase():", this.sports.title.toLowerCase())
         
         // Use this.$router.push to navigate to the corresponding route
         this.$router.push({ name: this.sports.title });
@@ -27,7 +27,7 @@ export default {
     },
 }
 </script>
-
+ 
 <style>
 .sports {
     flex: 0 ;
