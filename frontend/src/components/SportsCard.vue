@@ -7,6 +7,7 @@
             <div class="product-image-wrap">
                 <img :src="sports?.src" class="image" />
             </div>
+            
         </div>
         <button class="sports-detail" @click="navigateToPage">
             {{sports?.title}} 
@@ -87,5 +88,10 @@ sports-image-wrap {
     font-weight: 700;
     color: black;
     margin-top: 35px;
+}
+
+.sports-title{
+    position:absolute;
+    top:10px;
 }
 </style>

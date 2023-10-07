@@ -1,6 +1,5 @@
 <template>
     <div>
-      <h5>batminton page</h5>
         <div class="post" v-for="item in post">
         <h2>{{item.author }}</h2>
         <p>{{item.content }}</p></div>
@@ -14,7 +13,7 @@ import getPosts from "./../api/get-posts"
     computed: {
       post() {
         console.log(getPosts(10))
-        return getPosts(100)
+        return getPosts(10)
       }
     },
     methods: {
