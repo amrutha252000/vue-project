@@ -6,6 +6,16 @@ var logger = require('morgan');
 const mongoose = require('mongoose');
 mongoose.connect("mongodb+srv://AmruthaKunati:Amrutha22@cluster0.unhnf4t.mongodb.net/")
 
+const database = mongoose.connection
+
+database.on('error', (error) => {
+  console.log(error)
+})
+
+database.once('connected', () => {
+  console.log('Database Connected');
+})
+
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
