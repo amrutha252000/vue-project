@@ -7,11 +7,14 @@ const Sport = require('../models/schema');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));*/
 
+const bodyParser = require('body-parser');
+const jsonParser = bodyParser.json();
+
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
-router.post('/setposts', function(req, res, next){
+router.post('/setposts',jsonParser, function(req, res, next){
   const newSport = new Sport({
     sportdes: req.body.sportdes,
     time_stamp: req.body.time_stamp,

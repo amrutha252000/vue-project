@@ -1,4 +1,3 @@
-<!-- Batminton.vue -->
 <template>
     <div>
       <h1>Tennis page</h1>

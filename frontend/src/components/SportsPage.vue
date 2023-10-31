@@ -15,7 +15,7 @@
 
 <script>
 import SportsCard from '../components/SportsCard.vue' 
-
+import io from 'socket.io-client';
 export default {
   name: 'SportsPage',
   components: {
@@ -29,7 +29,8 @@ export default {
           title: 'Batminton',
           color: 'green',
           bgtext: 'SP',
-          src: require('../assets/batminton.jpeg')
+          src: require('../assets/batminton.jpeg'),
+          socket:io('localhost:3001')
         },
         {
           id   : 2,
@@ -46,6 +47,11 @@ export default {
           src: require('../assets/tennis.jpeg')
         }
       ]
+    }
+  },
+  methods:{
+    sendMessage(e){
+      e.preventDefault();
     }
   }
 }

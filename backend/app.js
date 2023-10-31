@@ -21,6 +21,17 @@ var usersRouter = require('./routes/users');
 
 var app = express();
 
+const server = app.listen(3001, function() {
+  console.log('server running on port 3001');
+});
+const io = require('socket.io')(server);
+
+console.log('entering')
+io.on('connection',function(socket){
+  console.log('entering')
+  console.log(socket.id)
+});
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
@@ -49,6 +60,5 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
-
 
 module.exports = app;

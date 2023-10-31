@@ -1,8 +1,6 @@
-var names = ['Matt Maribojoc', 'Lebron James', 'Bill Gates', 'Childish Gambino'] // used to generate posts for this tutorial
-
+var names = ['Matt Maribojoc', 'Lebron James', 'Bill Gates', 'Childish Gambino']
 const getPosts = (number) => {
-  // generate a number of posts
-  // in a real setting, this would be a database call or algorithm
+  //a database call or algorithm
 
   let ret = []
 
