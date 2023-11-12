@@ -1,8 +1,9 @@
 <template>
-    <div>
-        <div class="post" v-for="item in post">
-        <h2>{{item.author }}</h2>
-        <p>{{item.content }}</p></div>
+    <div >
+      <h1 style="color:rgb(48, 182, 249);text-align:center;padding-bottom: 20px;">Badminton Updates</h1>
+      <div  class="post" v-for="item in this.posts" :key="this.posts">
+      <h2>{{item.author }}</h2>
+      <p>{{item.content }}</p></div>
     </div>
 </template>
   
@@ -10,17 +11,39 @@
 import getPosts from "./../api/get-posts"
   export default {
     name: 'Batminton',
-    computed: {
-      post() {
-        console.log(getPosts(10))
-        return getPosts(10)
+    /*data() {
+      return {
+        posts : getPosts(7)
       }
-    },
-    methods: {
-      someMethod(){
-        getPosts(10)
-      }
+    },*/
+    async function() {
+    const posts = await fetch('/getposts')
+    return {
+      posts,
     }
+  },
+    mounted () {
+    this.websocket = new WebSocket('ws://localhost:8081/batminton/');
+
+    this.websocket.onopen = () => {
+      console.log('WebSocket connected for batminton');
+    };
+
+    this.websocket.onmessage = (event) => {
+      console.log(event.data);
+      this.posts.push(JSON.parse(event.data))
+      console.log(this.posts)
+      if (this.posts.length > 7)  {
+        this.posts.shift();
+      }
+    };
+  },
+    beforeUnmount() {
+    if (this.websocket) {
+        this.websocket.close();
+        console.log("baminton socket closed")
+    }
+  }
   }
 </script>
   

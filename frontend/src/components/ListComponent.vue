@@ -9,18 +9,18 @@
   
 <script>
 import { ref, onMounted, onUnmounted } from 'vue'
-
 import Batminton from './Batminton.vue'
+import Cricket from './Cricket.vue'
+import Tennis from './Tennis.vue'
 export default{
   components: {
-    Batminton
+    Batminton, Cricket, Tennis
 },
-  setup () {
-    const posts = ref(getPosts(10))
+async function() {
+    const posts = await fetch('/getposts')
     return {
       posts,
     }
   }
 }
 </script>
-

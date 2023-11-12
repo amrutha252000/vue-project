@@ -1,15 +1,19 @@
 const mongoose = require('mongoose');
-const projectSchema = new mongoose.Schema({
-  sportdes: {
+const SportData = new mongoose.Schema({
+  sportName: {
     type: String,
     //required: true,
   },
-  time_stamp: {
-    type: Number,
+  Headline: {
+    type: String,
     //required: true,
   },
-})
-module.exports = mongoose.model('Sport',projectSchema)
-
-
+  Content: {
+    type: String,
+    //required: true,
+  },
+  
+},{timestamps: true}
+)
+module.exports = mongoose.model('SportData',SportData)
 
