@@ -2,38 +2,48 @@
     <div>
       <h1 style="color:rgb(129, 81, 251);text-align:center;padding-bottom: 20px;">Cricket Updates</h1>
       <div class="post" v-for="item in this.posts" :key="this.posts">
-        <h2>{{item.author }}</h2>
-        <p>{{item.content }}</p></div>
+        <h2>{{item.Headline }}</h2>
+        <p>{{item.Content }}</p></div>
     </div>
   </template>
-  
+
   <script>
   import getPosts from "./../api/get-posts"
+  import axios from 'axios'
   export default {
     name: 'Cricket',
     data() {
+      var posts =[]
       return{
-        posts: getPosts(7)
+        posts:posts
       }
+    },
+    created(){
+      axios.post("http://127.0.0.1:3000/getposts", {'sportName': 'cricket'})
+      .then((data)=>{
+        this.posts = data.data.posts
+        console.log(data)
+      })
+      .catch((err)=>{
+        console.log(err)
+      })
     },
   mounted () {
   this.websocket = new WebSocket('ws://localhost:8081/cricket/');
-
   this.websocket.onopen = () => {
     console.log('WebSocket connected for cricket page');
   };
 
   this.websocket.onmessage = (event) => {
-      console.log("New event")
       console.log(event.data);
       this.posts.push(JSON.parse(event.data))
       console.log(this.posts)
-      if (this.posts.length > 10)  {
+      if (this.posts.length > 7)  {
         this.posts.shift();
       }
     };
   },
-  
+   
 beforeUnmount() {
   if (this.websocket) {
       this.websocket.close();

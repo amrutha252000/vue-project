@@ -17,8 +17,9 @@ mongoose.connect("mongodb+srv://AmruthaKunati:Amrutha22@cluster0.unhnf4t.mongodb
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-
+var cors = require('cors');
 var app = express();
+app.use(cors());
 
 var data_json_batminton = {
   "author":"someone",
@@ -53,7 +54,6 @@ server.on('connection',function connection(ws,req){
     case '/tennis/':
       ws.send(JSON.stringify(data_json_tennis))
       app.locals.tennis_sockets.push(ws)
-      
       break;
     default:
       ws.send('invalid page request');
@@ -61,21 +61,6 @@ server.on('connection',function connection(ws,req){
       break;
   }
 });
-
-/*const server = new WebSocket.Server({
-  port: 8081,
-});
-server.on('connection', (socket) => {
-  console.log(socket)
-  socket.on('message', (message) => {
-    console.log(message);  
-  });
-  var data_json = {
-    "author":"Someone",
-    "content":"Something"
-  }
-  socket.send(JSON.stringify(data_json));
-});*/
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
